@@ -95,3 +95,14 @@ median(cleansed_total_steps$steps)
 ## [1] 10762
 ```
 ## Are there differences in activity patterns between weekdays and weekends?
+
+```r
+cleansed_activity_data$weekend <- weekdays(as.Date(activity_data$date)) %in% c('Saturday','Sunday')
+cleansed_activity_data$weekend[cleansed_activity_data$weekend==FALSE] <- "Weekday"
+cleansed_activity_data$weekend[cleansed_activity_data$weekend==TRUE] <- "Weekend"
+
+library(lattice)
+xyplot(steps ~ interval | weekend, data=cleansed_activity_data, type='l', layout=c(1,2))
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png) 
